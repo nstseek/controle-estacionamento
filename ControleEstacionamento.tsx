@@ -1,5 +1,5 @@
 import React from "react";
-import { View, TextInput, Text, Button, AsyncStorage } from "react-native";
+import { View, TextInput, Text, Button, AsyncStorage, AsyncStorageStatic } from "react-native";
 
 interface ControleEstacionamentoState {
     saldo: number,
@@ -8,7 +8,7 @@ interface ControleEstacionamentoState {
     valorTemp: string
 }
 
-enum PersistentStorage {
+export enum PersistentStorage {
     'saldo' = 'saldo',
     'valor' = 'valor'
 }
@@ -44,45 +44,19 @@ const buttonContainerStyle = {
 
 export default class ControleEstacionamento extends React.Component {
     state: ControleEstacionamentoState;
+    asyncStorage: AsyncStorageStatic;
 
     constructor(props) {
         super(props);
+        this.asyncStorage = AsyncStorage;
         this.state = {
             saldo: 90,
             saldoTemp: `90`,
             valor: 4.5,
             valorTemp: `4.5`
         };
-        AsyncStorage.getItem(PersistentStorage.saldo, (error, result) => {
-            if (!error && result) {
-                this.setState(previousState => {
-                    return ({
-                        ...previousState,
-                        saldo: Number(result)
-                    })
-                })
-            }
-            else if (result === null) {
-                AsyncStorage.setItem(PersistentStorage.saldo, this.state.saldo.toString(), error => {
-                    console.log(error);
-                })
-            }
-        });
-        AsyncStorage.getItem(PersistentStorage.valor, (error, result) => {
-            if (!error && result) {
-                this.setState(previousState => {
-                    return ({
-                        ...previousState,
-                        valor: Number(result)
-                    })
-                })
-            }
-            else if (result === null) {
-                AsyncStorage.setItem(PersistentStorage.valor, this.state.valor.toString(), error => {
-                    console.log(error);
-                })
-            }
-        })
+        this.asyncStorage.getItem(PersistentStorage.saldo, this.saveSaldo.bind(this));
+        this.asyncStorage.getItem(PersistentStorage.valor, this.saveValor.bind(this));
     }
 
     render() {
@@ -114,9 +88,7 @@ export default class ControleEstacionamento extends React.Component {
     }
 
     setSaldo() {
-        AsyncStorage.setItem(PersistentStorage.saldo, this.state.saldoTemp, error => {
-            console.log(error);
-        })
+        this.asyncStorage.setItem(PersistentStorage.saldo, this.state.saldoTemp, this.errorFunc);
         this.setState(previousState => {
             return ({
                 ...previousState,
@@ -126,9 +98,7 @@ export default class ControleEstacionamento extends React.Component {
     }
 
     setValor() {
-        AsyncStorage.setItem(PersistentStorage.valor, this.state.valorTemp, error => {
-            console.log(error)
-        })
+        this.asyncStorage.setItem(PersistentStorage.valor, this.state.valorTemp, this.errorFunc);
         this.setState(previousState => {
             return ({
                 ...previousState,
@@ -166,8 +136,40 @@ export default class ControleEstacionamento extends React.Component {
                 })
             })
         }
-        AsyncStorage.setItem(PersistentStorage.saldo, this.state.saldo.toString(), error => {
+        this.asyncStorage.setItem(PersistentStorage.saldo, this.state.saldo.toString(), this.errorFunc);
+    }
+
+    errorFunc(error) {
+        if (error) {
             console.log(error);
-        })
+        }
+    }
+
+    saveValor(error, result) {
+        if (!error && result) {
+            this.setState(previousState => {
+                return ({
+                    ...previousState,
+                    valor: Number(result)
+                })
+            })
+        }
+        else if (result === null) {
+            this.asyncStorage.setItem(PersistentStorage.valor, this.state.valor.toString(), this.errorFunc);
+        }
+    }
+
+    saveSaldo(error, result) {
+        if (!error && result) {
+            this.setState(previousState => {
+                return ({
+                    ...previousState,
+                    saldo: Number(result)
+                })
+            })
+        }
+        else if (result === null) {
+            this.asyncStorage.setItem(PersistentStorage.saldo, this.state.saldo.toString(), this.errorFunc);
+        }
     }
 }

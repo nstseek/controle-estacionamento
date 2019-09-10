@@ -1,0 +1,253 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#fff",
+      "flex": 1,
+      "justifyContent": "center",
+      "marginBottom": 100,
+      "marginTop": 100,
+    }
+  }
+>
+  <View>
+    <Text>
+      Valor do estacionamento:
+    </Text>
+    <View
+      style={
+        Object {
+          "flex": 1,
+          "flexDirection": "row",
+          "height": 50,
+          "width": 200,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "height": 40,
+            "marginRight": 10,
+            "width": 200,
+          }
+        }
+      >
+        <TextInput
+          allowFontScaling={true}
+          onChangeText={[Function]}
+          rejectResponderTermination={true}
+          style={
+            Object {
+              "borderColor": "#555",
+              "borderRadius": 3,
+              "borderStyle": "solid",
+              "borderWidth": 1,
+            }
+          }
+          underlineColorAndroid="transparent"
+          value="4.5"
+        />
+      </View>
+      <View
+        style={
+          Object {
+            "height": 40,
+            "width": 80,
+          }
+        }
+      >
+        <View
+          accessibilityRole="button"
+          accessibilityStates={Array []}
+          accessible={true}
+          isTVSelectable={true}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+        >
+          <View
+            style={
+              Array [
+                Object {},
+              ]
+            }
+          >
+            <Text
+              style={
+                Array [
+                  Object {
+                    "color": "#007AFF",
+                    "fontSize": 18,
+                    "padding": 8,
+                    "textAlign": "center",
+                  },
+                ]
+              }
+            >
+              Set
+            </Text>
+          </View>
+        </View>
+      </View>
+    </View>
+    <Text>
+      Forçar saldo atual no cartão:
+    </Text>
+    <View
+      style={
+        Object {
+          "flex": 1,
+          "flexDirection": "row",
+          "height": 50,
+          "width": 200,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "height": 40,
+            "marginRight": 10,
+            "width": 200,
+          }
+        }
+      >
+        <TextInput
+          allowFontScaling={true}
+          onChangeText={[Function]}
+          rejectResponderTermination={true}
+          style={
+            Object {
+              "borderColor": "#555",
+              "borderRadius": 3,
+              "borderStyle": "solid",
+              "borderWidth": 1,
+            }
+          }
+          underlineColorAndroid="transparent"
+          value="90"
+        />
+      </View>
+      <View
+        style={
+          Object {
+            "height": 40,
+            "width": 80,
+          }
+        }
+      >
+        <View
+          accessibilityRole="button"
+          accessibilityStates={Array []}
+          accessible={true}
+          isTVSelectable={true}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+        >
+          <View
+            style={
+              Array [
+                Object {},
+              ]
+            }
+          >
+            <Text
+              style={
+                Array [
+                  Object {
+                    "color": "#007AFF",
+                    "fontSize": 18,
+                    "padding": 8,
+                    "textAlign": "center",
+                  },
+                ]
+              }
+            >
+              Set
+            </Text>
+          </View>
+        </View>
+      </View>
+    </View>
+    <Text>
+      Valor da diaria:
+    </Text>
+    <Text>
+      4.5
+    </Text>
+    <Text>
+      Saldo atual:
+    </Text>
+    <Text
+      style={
+        Object {
+          "fontSize": 70,
+        }
+      }
+    >
+      90
+    </Text>
+    <View
+      accessibilityRole="button"
+      accessibilityStates={Array []}
+      accessible={true}
+      isTVSelectable={true}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {},
+          ]
+        }
+      >
+        <Text
+          style={
+            Array [
+              Object {
+                "color": "#007AFF",
+                "fontSize": 18,
+                "padding": 8,
+                "textAlign": "center",
+              },
+            ]
+          }
+        >
+          -
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;

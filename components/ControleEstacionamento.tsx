@@ -96,11 +96,12 @@ export default class ControleEstacionamento extends React.Component<
         }));
     };
 
-    getHistoricoKey = (write: boolean) => PersistentStorage.historicoStack + (this.hisStackSize - (write ? 1 : 0));
+    getHistoricoKey = (write: boolean) => PersistentStorage.historicoStack + (this.hisStackSize + (write ? 1 : 0));
     // se o stackSize for < 0, n pode ler pq n existe stack negativo ne
+    // se for escrever, passa true como parametro e false caso va ler
 
-    updateStackSize = (): Promise<null> => {
-        return new Promise(async (resolve, reject) => {
+    updateStackSize = (): Promise<null> =>
+        new Promise(async (resolve) => {
             this.hisStackSize = this.hisStackSize + 1;
             await this.asyncStorage.setItem(
                 PersistentStorage.historicoStackSize,
@@ -109,17 +110,28 @@ export default class ControleEstacionamento extends React.Component<
             );
             resolve(null);
         });
-    };
 
-    writeToStack = async (data: string) => {
-        await this.asyncStorage.setItem(this.getHistoricoKey(true), data, this.errorFunc);
-        await this.updateStackSize();
-    };
+    writeToStack = (data: string): Promise<null> =>
+        new Promise(async (resolve) => {
+            await this.asyncStorage.setItem(this.getHistoricoKey(true), data, this.errorFunc);
+            await this.updateStackSize();
+            resolve(null);
+        });
+
+    formatDate = (date: Date) =>
+        `${date.getDate() < 10 ? '0' + date.getDate() : date.getDate()}/${
+            date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1
+        }/${date.getFullYear()}`;
+
+    formatTime = (date: Date) =>
+        `${date.getHours() < 10 ? '0' + date.getHours() : date.getHours()}:${
+            date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()
+        }:${date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds()}`;
 
     setSaldo = async () => {
         await this.asyncStorage.setItem(PersistentStorage.saldo, this.state.saldoTemp, this.errorFunc);
         const date = new Date();
-        await this.writeToStack(`${date.toDateString()}|Saldo|${date.toTimeString()}`);
+        await this.writeToStack(`${this.formatDate(date)}|Saldo - ${this.state.saldoTemp}|${this.formatTime(date)}`);
         this.setState((previousState) => {
             return {
                 ...previousState,
@@ -128,17 +140,17 @@ export default class ControleEstacionamento extends React.Component<
         });
     };
 
-    setValor = async() => {
+    setValor = async () => {
         this.asyncStorage.setItem(PersistentStorage.valor, this.state.valorTemp, this.errorFunc);
         const date = new Date();
-        await this.writeToStack(`${date.toDateString()}|Valor|${date.toTimeString()}`);
+        await this.writeToStack(`${this.formatDate(date)}|Valor - ${this.state.valorTemp}|${this.formatTime(date)}`);
         this.setState((previousState) => {
             return {
                 ...previousState,
                 valor: Number(this.state.valorTemp)
             };
         });
-    }
+    };
 
     setSaldoTemp(text: string) {
         this.setState((previousState) => {
@@ -158,19 +170,15 @@ export default class ControleEstacionamento extends React.Component<
         });
     }
 
-    decreaseSaldo() {
+    decreaseSaldo = async () => {
         if (this.state.saldo >= this.state.valor) {
             const date = new Date();
-            this.asyncStorage.setItem(
+            await this.asyncStorage.setItem(
                 PersistentStorage.saldo,
                 (this.state.saldo - this.state.valor).toString(),
                 this.errorFunc
             );
-            this.asyncStorage.setItem(
-                this.getHistoricoKey(true),
-                `${date.toDateString()}|Decrease|${date.toTimeString()}`,
-                this.errorFunc
-            );
+            await this.writeToStack(`${this.formatDate(date)}|Decrease - ${this.state.valor}|${this.formatTime(date)}`);
             this.setState((previousState) => {
                 return {
                     ...previousState,
@@ -178,7 +186,7 @@ export default class ControleEstacionamento extends React.Component<
                 };
             });
         }
-    }
+    };
 
     errorFunc(error) {
         if (error) {

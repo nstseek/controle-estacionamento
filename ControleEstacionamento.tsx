@@ -6,6 +6,7 @@ import * as BackgroundFetch from 'expo-background-fetch';
 import * as Expo from 'expo';
 import { LocalNotification } from 'expo/build/Notifications/Notifications.types';
 import { taskName } from './App';
+import { PersistentStorage } from './types';
 
 interface ControleEstacionamentoState {
     saldo: number;
@@ -13,11 +14,6 @@ interface ControleEstacionamentoState {
     valor: number;
     valorTemp: string;
     permNotifications: boolean;
-}
-
-export enum PersistentStorage {
-    saldo = 'saldo',
-    valor = 'valor'
 }
 
 const setContainerStyle = {

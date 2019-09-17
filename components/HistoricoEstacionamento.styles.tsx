@@ -11,21 +11,20 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     viewContainer: {
+        padding: 20,
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        width: '100%'
+        width: '100%',
+        height: '100%'
     },
     listContainer: {
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: '100%'
+        width: '100%',
+        height: '80%'
     },
     itemContainer: {
-        width: '80%',
+        width: '100%',
         padding: 10,
         display: 'flex',
         flexDirection: 'row',

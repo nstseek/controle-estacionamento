@@ -49,7 +49,7 @@ export default class HistoricoEstacionamento extends React.Component<
     mountItems = async () => {
         const stackSize = await this.asyncStorage.getItem(PersistentStorage.historicoStackSize, this.errorFunc);
         const stackNumSize = Number(stackSize);
-        if (stackNumSize < 0 || !stackNumSize) {
+        if (stackNumSize < 0 || !stackSize) {
             this.setState((previousState: HistoricoEstacionamentoState) => ({
                 ...previousState,
                 items: null

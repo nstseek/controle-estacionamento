@@ -1,7 +1,7 @@
 import React from 'react';
-import ControleEstacionamento from '../components/ControleEstacionamento';
-import { Screens } from '../types';
-import HistoricoEstacionamento from '../components/HistoricoEstacionamento';
+import ControleEstacionamento from '../../components/controle-estacionamento/ControleEstacionamento';
+import { Screens } from '../../types';
+import HistoricoEstacionamento from '../../components/historico-estacionamento/HistoricoEstacionamento';
 
 interface ViewerState {
     tela: Screens;

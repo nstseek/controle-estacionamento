@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, TextInput, Text, Button, AsyncStorage, AsyncStorageStatic } from 'react-native';
 import Styles from './ControleEstacionamento.styles';
-import { Screens, PersistentStorage } from '../types';
+import { Screens, PersistentStorage } from '../../types';
 
 interface ControleEstacionamentoState {
     saldo: number;

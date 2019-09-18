@@ -1,8 +1,7 @@
 import React from 'react';
-import { Screens, PersistentStorage } from '../types';
+import { Screens, PersistentStorage } from '../../types';
 import { Button, View, Text, AsyncStorageStatic, AsyncStorage, ScrollView } from 'react-native';
 import Styles from './HistoricoEstacionamento.styles';
-import { thisTypeAnnotation } from '@babel/types';
 
 interface HistoricoEstacionamentoProps {
     setTela(tela: Screens): any;

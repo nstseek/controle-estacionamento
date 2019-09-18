@@ -1,7 +1,6 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import ControleEstacionamento from './components/ControleEstacionamento';
-import Viewer from './containers/Viewer';
+import Viewer from './containers/viewer/Viewer';
 
 export default function App() {
     return (

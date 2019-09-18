@@ -1,7 +1,8 @@
 import React from 'react';
-import ControleEstacionamento, { PersistentStorage } from './ControleEstacionamento';
+import ControleEstacionamento from './ControleEstacionamento';
 import renderer from 'react-test-renderer';
 import { AsyncStorage } from 'react-native';
+import { Screens, PersistentStorage } from '../../types';
 
 const mockAsyncStorage = {
     ...AsyncStorage,
@@ -10,7 +11,7 @@ const mockAsyncStorage = {
 }
 
 it('renders correctly', () => {
-    expect(renderer.create(<ControleEstacionamento />).toJSON()).toMatchSnapshot();
+    expect(renderer.create(<ControleEstacionamento setTela={(tela: Screens)=> jest.fn()}/>).toJSON()).toMatchSnapshot();
 });
 describe('testa funcoes', () => {
     it('deve chamar o asyncStorage pra salvar o saldo', () => {
